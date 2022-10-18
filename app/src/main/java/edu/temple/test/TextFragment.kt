@@ -9,6 +9,8 @@ import android.widget.TextView
 
 class TextFragment : Fragment() {
 
+    private var viewModel: ViewModel? = null
+
     private lateinit var textView: TextView
 
     override fun onCreateView(
@@ -19,6 +21,8 @@ class TextFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_text, container, false).apply {
             textView = findViewById(R.id.textView)
         }
+
+
     }
 
     fun changeTextSize (size: Float) {

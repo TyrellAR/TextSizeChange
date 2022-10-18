@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity(), SizeFragment.ValueChangeInterface {
         if (savedInstanceState == null) {
             textFragment = TextFragment()
 
+
+
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.container_1, SizeFragment())

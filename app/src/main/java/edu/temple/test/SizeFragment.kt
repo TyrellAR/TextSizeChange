@@ -1,5 +1,6 @@
 package edu.temple.test
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,8 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.lifecycle.ViewModelProvider
 
 class SizeFragment : Fragment() {
+
+
+    companion object{
+        lateinit var mctx: Context
+    }
+
+    private var viewModel: ViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,12 +34,23 @@ class SizeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(requireActivity())[ViewModel:: class.java]
+        val seekBar = view.findViewById<SeekBar>(R.id.seekBar) as SeekBar
+
+
+
         with (view.findViewById(R.id.seekBar) as SeekBar) {
             setOnSeekBarChangeListener(object: OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, user: Boolean) {
 
                     // Inform parent about slider event with updated value
                     (requireActivity() as ValueChangeInterface).onChange(progress)
+                    viewModel!!.setData(R.id.s)
+
+                    val myfrag = TextFragment()
+                    val frag = fragmentManager!!.beginTransaction()
+
+                    frag.replace()
                 }
                 override fun onStartTrackingTouch(p0: SeekBar?) {}
                 override fun onStopTrackingTouch(p0: SeekBar?) {}
